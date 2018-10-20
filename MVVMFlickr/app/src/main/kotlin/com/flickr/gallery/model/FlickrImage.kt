@@ -2,7 +2,6 @@ package com.flickr.gallery.model
 
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
-import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 /**
@@ -17,4 +16,8 @@ class FlickrImage {
     var id: String? = null
     @SerializedName("url_s")
     var url_s: String? = null
+    @SerializedName("datetaken")
+    var datetaken : String? = null
+    @SerializedName("ownername")
+    var ownername : String? = null
 }

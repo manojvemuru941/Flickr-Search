@@ -19,8 +19,8 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "BASE_URL", "\"https://api.flickr.com/services/\""
-        buildConfigField "String", "LATEST", "\"rest/?method=flickr.photos.getRecent&format=json&nojsoncallback=1&api_key=ed3718658a013cfc67ea9b32d4bc5677&extras=url_s\""
-        buildConfigField "String", "SEARCH", "\"method=flickr.photos.getRecent&format=json&nojsoncallback=1&api_key=ed3718658a013cfc67ea9b32d4bc5677&text=%s&extras=url_s\""
+        buildConfigField "String", "LATEST", "\"rest/?method=flickr.photos.getRecent&format=json&nojsoncallback=1&api_key=ed3718658a013cfc67ea9b32d4bc5677&extras=url_s,date_upload,date_taken,owner_name\""
+        buildConfigField "String", "SEARCH", "\"method=flickr.photos.getRecent&format=json&nojsoncallback=1&api_key=ed3718658a013cfc67ea9b32d4bc5677&text=%s&extras=url_s,date_upload,date_taken,owner_name\""
 
         kapt {
             arguments {

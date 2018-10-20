@@ -3,4 +3,6 @@
 
     <string name="retry">Retry</string>
     <string name="error">An error occurred while loading the images</string>
+
+    <string name="item_meta">Owner Name: %s\nTaken : %s</string>
 </resources>
