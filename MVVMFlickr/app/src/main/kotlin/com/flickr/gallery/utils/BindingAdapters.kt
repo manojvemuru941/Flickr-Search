@@ -3,10 +3,12 @@ package com.flickr.gallery.utils
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import android.databinding.BindingAdapter
+import android.net.Uri
 import android.support.v7.widget.RecyclerView
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.TextView
+import com.facebook.drawee.view.SimpleDraweeView
 import com.flickr.gallery.utils.extension.getParentActivity
 
 @BindingAdapter("adapter")
@@ -29,3 +31,7 @@ fun setMutableText(view: TextView,  text: MutableLiveData<String>?) {
         text.observe(parentActivity, Observer { value -> view.text = value?:""})
     }
 }
+
+@BindingAdapter("imageUri")
+fun setImageUri(view : SimpleDraweeView, imageUri: String?)
+    = view.setImageURI(imageUri)

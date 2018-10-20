@@ -19,8 +19,8 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "BASE_URL", "\"https://api.flickr.com/services/\""
-        buildConfigField "String", "LATEST", "\"method=flickr.photos.getRecent&format=json&nojsoncallback=1&api_key=ed3718658a013cfc67ea9b32d4bc5677\""
-        buildConfigField "String", "SEARCH", "\"method=flickr.photos.getRecent&format=json&nojsoncallback=1&api_key=ed3718658a013cfc67ea9b32d4bc5677&text=%s\""
+        buildConfigField "String", "LATEST", "\"rest/?method=flickr.photos.getRecent&format=json&nojsoncallback=1&api_key=ed3718658a013cfc67ea9b32d4bc5677&extras=url_s\""
+        buildConfigField "String", "SEARCH", "\"method=flickr.photos.getRecent&format=json&nojsoncallback=1&api_key=ed3718658a013cfc67ea9b32d4bc5677&text=%s&extras=url_s\""
 
         kapt {
             arguments {
@@ -55,6 +55,7 @@ dependencies {
 
     // RecyclerView
     implementation "com.android.support:recyclerview-v7:$android_support_version"
+    implementation "com.android.support:cardview-v7:$android_support_version"
 
     // Constraint Layout
     implementation "com.android.support.constraint:constraint-layout:$constraint_layout"
@@ -81,7 +82,6 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:$rxjava"
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroid"
 
-    //Glide
-    implementation "com.github.bumptech.glide:glide:$glide"
-    annotationProcessor "com.github.bumptech.glide:compiler:$glide"
+    //fresco
+    implementation "com.facebook.fresco:fresco:$fresco"
 }

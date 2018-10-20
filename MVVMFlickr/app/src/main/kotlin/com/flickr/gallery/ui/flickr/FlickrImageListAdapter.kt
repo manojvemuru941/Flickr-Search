@@ -26,7 +26,7 @@ class FlickrImageListAdapter: RecyclerView.Adapter<FlickrImageListAdapter.ViewHo
     }
 
     fun updateImageList(postList:FlickrImages){
-        this.imageList = postList.getImage()!!
+        this.imageList = postList.photo!!
         notifyDataSetChanged()
     }
 

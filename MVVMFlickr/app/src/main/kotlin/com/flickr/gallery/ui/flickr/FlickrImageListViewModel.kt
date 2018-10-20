@@ -40,7 +40,7 @@ class FlickrImageListViewModel(private val favImageDao: FavImageDao):BaseViewMod
                 .doOnTerminate { onRetrieveListFinish() }
                 .subscribe(
                         { onRetrieveImages(it)},
-                        { onRetrieveListError()}
+                        {err -> onRetrieveListError(err)}
                 )
     }
 
@@ -58,7 +58,7 @@ class FlickrImageListViewModel(private val favImageDao: FavImageDao):BaseViewMod
 
     }
 
-    private fun onRetrieveListError(){
+    private fun onRetrieveListError(err:Any){
         errorMessage.value = R.string.error
     }
 }

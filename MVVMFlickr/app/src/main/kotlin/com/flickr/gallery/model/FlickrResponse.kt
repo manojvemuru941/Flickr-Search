@@ -10,17 +10,17 @@ import com.google.gson.annotations.SerializedName
 class FlickrResponse {
     @SerializedName("photos")
     @Expose
-    private var images: FlickrImages? = null
+    private var photos: FlickrImages? = null
     @SerializedName("stat")
     @Expose
     private var stat: String? = null
 
     fun getImages(): FlickrImages? {
-        return images
+        return photos
     }
 
     fun setImages(images: FlickrImages) {
-        this.images = images
+        this.photos = images
     }
 
     fun getStat(): String? {
