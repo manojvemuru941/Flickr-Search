@@ -54,7 +54,7 @@ class FlickrImageListViewModel(private val favImageDao: FavImageDao):BaseViewMod
     }
 
     private fun onRetrieveImages(flickrResponse: FlickrResponse) {
-        imageListAdapter.updateImageList(flickrResponse.items!!)
+        imageListAdapter.updateImageList(flickrResponse.getImages()!!)
 
     }
 

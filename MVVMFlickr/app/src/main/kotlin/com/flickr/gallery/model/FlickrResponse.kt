@@ -1,5 +1,6 @@
 package com.flickr.gallery.model
 
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 /**
@@ -7,12 +8,26 @@ import com.google.gson.annotations.SerializedName
  */
 
 class FlickrResponse {
-    @SerializedName("title")
-    var title:String? =null
+    @SerializedName("photos")
+    @Expose
+    private var images: FlickrImages? = null
+    @SerializedName("stat")
+    @Expose
+    private var stat: String? = null
 
-    @SerializedName("link")
-    var link:String? = null
+    fun getImages(): FlickrImages? {
+        return images
+    }
 
-    @SerializedName("items")
-    var items:List<FlickrImage>? = null
+    fun setImages(images: FlickrImages) {
+        this.images = images
+    }
+
+    fun getStat(): String? {
+        return stat
+    }
+
+    fun setStat(stat: String) {
+        this.stat = stat
+    }
 }

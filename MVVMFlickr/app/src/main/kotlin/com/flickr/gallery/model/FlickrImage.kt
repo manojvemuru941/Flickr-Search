@@ -11,25 +11,25 @@ import com.google.gson.annotations.SerializedName
 @Entity
 class FlickrImage {
     @PrimaryKey(autoGenerate = true)
-    var id:Int = 0
+    @SerializedName("id")
+    private var id: String? = null
+    @SerializedName("url_s")
+    private var imageUrl: String? = null
 
-    @SerializedName("title")
-    @Expose
-    var title: String? = null
 
-    @SerializedName("link")
-    @Expose
-    var imageURL: String? = null
+    fun setId(id: String) {
+        this.id = id
+    }
 
-    @SerializedName("date_taken")
-    @Expose
-    var dateTaken: String? = null
+    fun setImageUrl(imageUrl: String) {
+        this.imageUrl = imageUrl
+    }
 
-    @SerializedName("description")
-    @Expose
-    var description: String? = null
+    fun getId(): String? {
+        return id
+    }
 
-    @SerializedName("author")
-    @Expose
-    var author: String? = null
+    fun getImageUrl(): String? {
+        return imageUrl
+    }
 }

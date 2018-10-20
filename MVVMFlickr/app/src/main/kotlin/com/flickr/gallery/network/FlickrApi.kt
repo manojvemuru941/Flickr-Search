@@ -14,4 +14,10 @@ interface FlickrApi {
      */
     @GET(LATEST)
     fun getFlickrLatestImages():Observable<FlickrResponse>
+
+    /**
+     * Get Image from url
+     */
+    @GET(LATEST)
+    fun getSearchImages():Observable<FlickrResponse>
 }

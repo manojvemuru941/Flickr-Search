@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import com.flickr.gallery.R
 import com.flickr.gallery.databinding.ItemImageBinding
 import com.flickr.gallery.model.FlickrImage
+import com.flickr.gallery.model.FlickrImages
 
 class FlickrImageListAdapter: RecyclerView.Adapter<FlickrImageListAdapter.ViewHolder>() {
-    private lateinit var postList:List<FlickrImage>
+    private lateinit var imageList:List<FlickrImage>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FlickrImageListAdapter.ViewHolder {
         val binding: ItemImageBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_image, parent, false)
@@ -17,15 +18,15 @@ class FlickrImageListAdapter: RecyclerView.Adapter<FlickrImageListAdapter.ViewHo
     }
 
     override fun onBindViewHolder(holder: FlickrImageListAdapter.ViewHolder, position: Int) {
-        holder.bind(postList[position])
+        holder.bind(imageList[position])
     }
 
     override fun getItemCount(): Int {
-        return if(::postList.isInitialized) postList.size else 0
+        return if(::imageList.isInitialized) imageList.size else 0
     }
 
-    fun updateImageList(postList:List<FlickrImage>){
-        this.postList = postList
+    fun updateImageList(postList:FlickrImages){
+        this.imageList = postList.getImage()!!
         notifyDataSetChanged()
     }
 
