@@ -16,21 +16,18 @@
         app:cardElevation="8dp"
         app:cardUseCompatPadding="true"
         style="@style/item_card_style">
-
-        <TextView
-            android:id="@+id/image_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            app:mutableText="@{viewModel.getImageTitle()}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/image_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:imageUri="@{viewModel.getImageUrl()}"
             app:viewAspectRatio="1" />
+        <TextView
+            android:id="@+id/image_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            app:mutableText="@{viewModel.getImageTitle()}"
+            style="@style/item_text_style" />
     </android.support.v7.widget.CardView>
 </layout>

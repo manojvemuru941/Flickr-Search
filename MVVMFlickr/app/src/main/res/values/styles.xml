@@ -14,4 +14,21 @@
         <item name="android:paddingRight">@dimen/item_padding</item>
     </style>
 
+    <style name="item_text_style">
+        <item name="android:layout_gravity">bottom</item>
+        <item name="android:background">@color/item_text_background_color</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/item_padding</item>
+        <item name="android:paddingRight">@dimen/item_padding</item>
+        <item name="android:textColor">@color/item_text_color</item>
+    </style>
+    <!--android:layout_gravity="bottom"-->
+    <!--android:background="#80000000"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:maxLines="1"-->
+    <!--android:paddingLeft="16dp"-->
+    <!--android:paddingRight="16dp"-->
+    <!--android:text="@{viewModel.title}"-->
+    <!--android:textColor="#FFF-->
+
 </resources>
