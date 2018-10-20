@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="item_card_style" >
+        <item name="android:paddingLeft">@dimen/item_padding</item>
+        <item name="android:paddingRight">@dimen/item_padding</item>
+    </style>
+
 </resources>
