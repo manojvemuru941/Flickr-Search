@@ -45,9 +45,9 @@ class ListFragmentViewModel : BaseViewModel() {
 
     private fun loadImages(query : String) {
         if(query.isBlank()) {
-            handleResponse(flickrApi.getFlickrLatestImages(METHOD_NAME, BuildConfig.FLICKR_API_TOKEN, FORMAT, NO_JSON_CALL_BACK, EXTRAS))
+            handleResponse(flickrApi.getFlickrLatestImages(METHOD_NAME_RECENT, BuildConfig.FLICKR_API_TOKEN, FORMAT, NO_JSON_CALL_BACK, EXTRAS))
         } else {
-            handleResponse(flickrApi.getSearchImages(METHOD_NAME, BuildConfig.FLICKR_API_TOKEN, FORMAT, NO_JSON_CALL_BACK, EXTRAS, query))
+            handleResponse(flickrApi.getSearchImages(METHOD_NAME_SEARCH, BuildConfig.FLICKR_API_TOKEN, FORMAT, NO_JSON_CALL_BACK, EXTRAS, query))
         }
     }
 
