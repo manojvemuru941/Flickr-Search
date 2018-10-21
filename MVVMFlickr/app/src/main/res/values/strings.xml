@@ -5,4 +5,5 @@
     <string name="error">An error occurred while loading the images</string>
 
     <string name="item_meta">Owner Name: %s\n Date Taken : %s</string>
+    <string name="search_hint">Search</string>
 </resources>

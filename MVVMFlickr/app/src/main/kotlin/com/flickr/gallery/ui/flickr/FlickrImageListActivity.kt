@@ -1,42 +1,80 @@
 package com.flickr.gallery.ui.flickr
 
-import android.arch.lifecycle.Observer
+import android.app.SearchManager
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.annotation.StringRes
-import android.support.design.widget.Snackbar
+import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import com.flickr.gallery.injection.ViewModelFactory
 import com.flickr.gallery.R
-import com.flickr.gallery.databinding.ActivityImageListBinding
+import com.flickr.gallery.databinding.MainActivityBinding
+import com.flickr.gallery.injection.ViewModelFactory
+
 
 class FlickrImageListActivity: AppCompatActivity() {
-    private lateinit var binding: ActivityImageListBinding
+    private lateinit var binding: MainActivityBinding
+    private lateinit var recentImagesFragment: FlickrRecentListFragment
     private lateinit var viewModel: FlickrImageListViewModel
-    private var errorSnackbar: Snackbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_image_list)
-        binding.postList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding = DataBindingUtil.setContentView(this, R.layout.main_activity)
+
+        binding.bottomNavigation.selectedItemId = R.id.recent_images
+        recentImagesFragment = FlickrRecentListFragment.newInstanceRecentImagesFragment()
+        recentImagesFragment.retainInstance = true
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, recentImagesFragment).commit()
+        binding.bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemSelected)
 
         viewModel = ViewModelProviders.of(this, ViewModelFactory(this)).get(FlickrImageListViewModel::class.java)
-        viewModel.errorMessage.observe(this, Observer {
-            errorMessage -> if(errorMessage != null) showError(errorMessage) else hideError()
-        })
-        binding.viewModel = viewModel
+
+        handleIntent(intent)
     }
 
-    private fun showError(@StringRes errorMessage:Int){
-        errorSnackbar = Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_INDEFINITE)
-        errorSnackbar?.setAction(R.string.retry, viewModel.errorClickListener)
-        errorSnackbar?.show()
+    /**
+     * Handles intent action
+     */
+    private fun handleIntent(intent: Intent) {
+        if (Intent.ACTION_SEARCH == intent.action) {
+            val query = intent.getStringExtra(SearchManager.QUERY)
+            doSearchQuery(query)
+        }
+
     }
 
-    private fun hideError(){
-        errorSnackbar?.dismiss()
+    /**
+     * Provides Entry point for Single Top Activity
+     * @param intent intent action
+     */
+    override fun onNewIntent(intent: Intent) {
+        setIntent(intent)
+        handleIntent(intent)
+    }
+
+    /**
+     * Initiates Search Fragment with query
+     * @param query string query
+     */
+    private fun doSearchQuery(query: String) {
+       val recentTagImagesFragment = FlickrSearchListFragment.newInstanceRecentImagesFragment(query)
+        recentTagImagesFragment.retainInstance = true
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, recentTagImagesFragment).commit()
+    }
+
+    /**
+     * listener for Navigation Item Selected
+     */
+   private val onNavigationItemSelected: BottomNavigationView.OnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.recent_images -> {
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, recentImagesFragment).commit()
+            }
+            R.id.search_images -> {
+                onSearchRequested()
+            }
+        }
+        true
     }
 }

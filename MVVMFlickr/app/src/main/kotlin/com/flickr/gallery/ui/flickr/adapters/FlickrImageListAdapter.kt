@@ -1,4 +1,4 @@
-package com.flickr.gallery.ui.flickr
+package com.flickr.gallery.ui.flickr.adapters
 
 import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
@@ -8,25 +8,34 @@ import com.flickr.gallery.R
 import com.flickr.gallery.databinding.ItemImageBinding
 import com.flickr.gallery.model.FlickrImage
 import com.flickr.gallery.model.FlickrImages
+import com.flickr.gallery.ui.flickr.ImageViewModel
 
 class FlickrImageListAdapter: RecyclerView.Adapter<FlickrImageListAdapter.ViewHolder>() {
     private lateinit var imageList:List<FlickrImage>
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FlickrImageListAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemImageBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_image, parent, false)
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: FlickrImageListAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(imageList[position])
     }
 
+    /**
+     * Provides number of items to recycler Adapter
+     * @return return count
+     */
     override fun getItemCount(): Int {
         return if(::imageList.isInitialized) imageList.size else 0
     }
 
-    fun updateImageList(postList:FlickrImages){
-        this.imageList = postList.photo!!
+    /**
+     * Updates images list
+     * @param flickrImages list of flickr Images
+     */
+    fun updateImageList(flickrImages:FlickrImages){
+        this.imageList = flickrImages.photo!!
         notifyDataSetChanged()
     }
 

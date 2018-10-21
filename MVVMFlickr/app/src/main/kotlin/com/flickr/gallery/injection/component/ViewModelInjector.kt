@@ -3,6 +3,7 @@ package com.flickr.gallery.injection.component
 import dagger.Component
 import com.flickr.gallery.injection.module.NetworkModule
 import com.flickr.gallery.ui.flickr.FlickrImageListViewModel
+import com.flickr.gallery.ui.flickr.ListFragmentViewModel
 import com.flickr.gallery.ui.flickr.ImageViewModel
 import javax.inject.Singleton
 
@@ -17,6 +18,9 @@ interface ViewModelInjector {
      * @param flickrImageListViewModel FlickrImageListViewModel in which to inject the dependencies
      */
     fun inject(flickrImageListViewModel: FlickrImageListViewModel)
+
+    fun inject(recentFragmentViewModel: ListFragmentViewModel)
+
     /**
      * Injects required dependencies into the specified ImageViewModel.
      * @param imageViewModel ImageViewModel in which to inject the dependencies

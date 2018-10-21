@@ -5,6 +5,7 @@ import com.flickr.gallery.injection.component.DaggerViewModelInjector
 import com.flickr.gallery.injection.component.ViewModelInjector
 import com.flickr.gallery.injection.module.NetworkModule
 import com.flickr.gallery.ui.flickr.FlickrImageListViewModel
+import com.flickr.gallery.ui.flickr.ListFragmentViewModel
 import com.flickr.gallery.ui.flickr.ImageViewModel
 
 abstract class BaseViewModel:ViewModel(){
@@ -24,6 +25,7 @@ abstract class BaseViewModel:ViewModel(){
         when (this) {
             is FlickrImageListViewModel -> injector.inject(this)
             is ImageViewModel -> injector.inject(this)
+            is ListFragmentViewModel -> injector.inject(this)
         }
     }
 }

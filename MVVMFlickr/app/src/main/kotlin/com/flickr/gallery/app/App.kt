@@ -9,6 +9,9 @@ import com.flickr.gallery.utils.INIT
  */
 class App : Application() {
 
+    /**
+     *  onCreate method of Application
+     */
     override fun onCreate() {
         super.onCreate()
         Fresco.initialize(this)

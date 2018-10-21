@@ -5,22 +5,18 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 28
-
     dataBinding {
         enabled = true
     }
-
     defaultConfig {
         applicationId "com.flickr.gallery"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "BASE_URL", "\"https://api.flickr.com/services/\""
-        buildConfigField "String", "LATEST", "\"rest/?method=flickr.photos.getRecent&format=json&nojsoncallback=1&api_key=ed3718658a013cfc67ea9b32d4bc5677&extras=url_s,date_upload,date_taken,owner_name\""
-        buildConfigField "String", "SEARCH", "\"method=flickr.photos.getRecent&format=json&nojsoncallback=1&api_key=ed3718658a013cfc67ea9b32d4bc5677&text=%s&extras=url_s,date_upload,date_taken,owner_name\""
 
         kapt {
             arguments {
@@ -35,16 +31,25 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildTypes.each {
+        it.buildConfigField 'String', 'FLICKR_API_TOKEN', MyAPIKey
+    }
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
         test.java.srcDirs = ['src/test/kotlin']
         androidTest.java.srcDirs = ['src/androidTest/kotlin']
     }
+    productFlavors {
+    }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.android.support:appcompat-v7:$android_support_version"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
@@ -61,7 +66,7 @@ dependencies {
     implementation "com.android.support.constraint:constraint-layout:$constraint_layout"
 
     // LiveData & ViewModel
-    implementation"android.arch.lifecycle:extensions:$lifecycle_version"
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
 
     // Room
     implementation "android.arch.persistence.room:runtime:$room_version"
@@ -76,7 +81,7 @@ dependencies {
     // Dagger 2
     implementation "com.google.dagger:dagger:$dagger2_version"
     kapt "com.google.dagger:dagger-compiler:$dagger2_version"
-    compileOnly "org.glassfish:javax.annotation:3.1.1"
+    compileOnly 'org.glassfish:javax.annotation:3.1.1'
 
     //Rx
     implementation "io.reactivex.rxjava2:rxjava:$rxjava"

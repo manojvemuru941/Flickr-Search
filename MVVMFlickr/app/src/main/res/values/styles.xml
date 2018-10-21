@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -22,13 +22,17 @@
         <item name="android:paddingRight">@dimen/item_padding</item>
         <item name="android:textColor">@color/item_text_color</item>
     </style>
-    <!--android:layout_gravity="bottom"-->
-    <!--android:background="#80000000"-->
-    <!--android:gravity="center_vertical"-->
-    <!--android:maxLines="1"-->
-    <!--android:paddingLeft="16dp"-->
-    <!--android:paddingRight="16dp"-->
-    <!--android:text="@{viewModel.title}"-->
-    <!--android:textColor="#FFF-->
 
+    <style name="Widget.BottomNavigationView" parent = "Widget.Design.BottomNavigationView">
+        <item name="android:fontFamily">@font/concert_one</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="Widget_Toolbar_Text">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:text">@string/app_name</item>
+    </style>
 </resources>
