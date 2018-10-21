@@ -21,18 +21,4 @@ class FlickrRecentListFragment : ListFragment() {
             return  FlickrRecentListFragment()
         }
     }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_image_list, container, false)
-
-        binding.postList.layoutManager = LinearLayoutManager(activity?.applicationContext, LinearLayoutManager.VERTICAL, false)
-
-        viewModel = ViewModelProviders.of(this).get(ListFragmentViewModel::class.java)
-        viewModel.errorMessage.observe(this, Observer {
-            errorMessage -> if(errorMessage != null) showError(errorMessage) else hideError()
-        })
-        binding.viewModel = viewModel
-        loadImages("")
-        return binding.root
-    }
 }

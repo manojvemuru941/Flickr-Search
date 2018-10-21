@@ -26,22 +26,4 @@ class FlickrSearchListFragment : ListFragment() {
             return fragment
         }
     }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_image_list, container, false)
-
-        binding.postList.layoutManager = LinearLayoutManager(activity?.applicationContext, LinearLayoutManager.VERTICAL, false)
-
-        viewModel = ViewModelProviders.of(this).get(ListFragmentViewModel::class.java)
-        viewModel.errorMessage.observe(this, Observer {
-            errorMessage -> if(errorMessage != null) showError(errorMessage) else hideError()
-        })
-        binding.viewModel = viewModel
-
-        if(arguments != null && arguments?.containsKey(SEARCH_KEY)!!) {
-            loadImages(arguments!!.getString(SEARCH_KEY))
-        }
-        return binding.root
-    }
-
 }
