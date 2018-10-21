@@ -1,10 +1,12 @@
-package com.flickr.gallery.ui.flickr
+package com.flickr.gallery.ui.flickr.base
 
 import android.arch.lifecycle.MutableLiveData
+import android.util.Log
 import android.view.View
 import com.flickr.gallery.BuildConfig
 import com.flickr.gallery.R
 import com.flickr.gallery.base.BaseViewModel
+import com.flickr.gallery.model.FavImageDao
 import com.flickr.gallery.model.FlickrImage
 import com.flickr.gallery.model.FlickrResponse
 import com.flickr.gallery.network.FlickrApi
@@ -16,22 +18,23 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.util.*
 import javax.inject.Inject
-import kotlin.Comparator
 
 /**
  * Created by Manoj Vemuru on 2018-10-20.
  */
 
-class ListFragmentViewModel : BaseViewModel() {
+open class ListFragmentViewModel : BaseViewModel() {
     @Inject
     lateinit var flickrApi: FlickrApi
+    @Inject
+    lateinit var favImageDao: FavImageDao
     val imageListAdapter: FlickrImageListAdapter = FlickrImageListAdapter()
 
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
     val errorMessage: MutableLiveData<Int> = MutableLiveData()
     val errorClickListener = View.OnClickListener { loadImages("") }
 
-    private lateinit var subscription: Disposable
+    protected lateinit var subscription: Disposable
 
     fun init() {
         loadImages("")
@@ -58,13 +61,13 @@ class ListFragmentViewModel : BaseViewModel() {
      * Handles Flickr Api Response
      * @param response Rective Observable for Flickr API response
      */
-    private fun handleResponse(response : Observable<FlickrResponse>) {
+    protected fun handleResponse(response : Observable<FlickrResponse>) {
        subscription = response.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onRetrieveListStart() }
                 .doOnTerminate { onRetrieveListFinish() }
                 .subscribe(
-                        { onRetrieveImages(it)},
+                        { onRetrieveImages(it.getImages()!!.photo!!)},
                         {err -> onRetrieveListError(err)}
                 )
     }
@@ -72,7 +75,7 @@ class ListFragmentViewModel : BaseViewModel() {
     /**
      * Shows Loading ProgressBar
      */
-    private fun onRetrieveListStart(){
+    protected fun onRetrieveListStart(){
         loadingVisibility.value = View.VISIBLE
         errorMessage.value = null
     }
@@ -80,7 +83,7 @@ class ListFragmentViewModel : BaseViewModel() {
     /**
      * Hides ProgressBar
      */
-    private fun onRetrieveListFinish(){
+    protected fun onRetrieveListFinish(){
         loadingVisibility.value = View.GONE
     }
 
@@ -88,16 +91,17 @@ class ListFragmentViewModel : BaseViewModel() {
      * Loads Images List to Adapter
      * @param flickrResponse Flickr API response
      */
-    private fun onRetrieveImages(flickrResponse: FlickrResponse) {
-        imageListAdapter.updateImageList(flickrResponse.getImages()!!)
+    protected fun onRetrieveImages(listImages: List<FlickrImage>) {
+        imageListAdapter.updateImageList(listImages)
 
     }
 
     /**
      * Shows Error Message
      */
-    private fun onRetrieveListError(err:Any){
+    protected fun onRetrieveListError(err:Throwable){
         errorMessage.value = R.string.error
+        Log.e("ERROR LOADING", err.localizedMessage)
     }
 
     fun sort(type : Int) {

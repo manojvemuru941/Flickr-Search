@@ -11,7 +11,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 /**
- * Module which provides all required dependencies about network
+ * Retrofit Module which provides all required dependencies about network
  */
 @Module
 // Safe here as we are dealing with a Dagger 2 module

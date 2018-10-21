@@ -34,8 +34,8 @@ class FlickrImageListAdapter: RecyclerView.Adapter<FlickrImageListAdapter.ViewHo
      * Updates images list
      * @param flickrImages list of flickr Images
      */
-    fun updateImageList(flickrImages:FlickrImages){
-        this.imageList = flickrImages.photo!!
+    fun updateImageList(listImages: List<FlickrImage>){
+        this.imageList = listImages
         notifyDataSetChanged()
     }
 

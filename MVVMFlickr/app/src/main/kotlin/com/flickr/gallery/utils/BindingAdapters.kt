@@ -7,6 +7,8 @@ import android.net.Uri
 import android.support.v7.widget.RecyclerView
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ImageButton
 import android.widget.TextView
 import com.facebook.drawee.view.SimpleDraweeView
 import com.flickr.gallery.utils.extension.getParentActivity
@@ -35,3 +37,8 @@ fun setMutableText(view: TextView,  text: MutableLiveData<String>?) {
 @BindingAdapter("imageUri")
 fun setImageUri(view : SimpleDraweeView, imageUri: String?)
     = view.setImageURI(imageUri)
+
+@BindingAdapter("itemOnClick")
+fun setOnItemClickListener(imageButton: ImageButton, onClickListener: View.OnClickListener) {
+    imageButton.setOnClickListener(onClickListener)
+}

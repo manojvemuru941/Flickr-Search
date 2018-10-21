@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.flickr.gallery.ui.flickr.ListFragmentViewModel" />
+            type="com.flickr.gallery.ui.flickr.base.ListFragmentViewModel" />
     </data>
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"

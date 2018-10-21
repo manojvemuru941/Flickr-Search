@@ -1,4 +1,4 @@
-package com.flickr.gallery.ui.flickr
+package com.flickr.gallery.ui.flickr.base
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -7,10 +7,7 @@ import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.*
 import com.flickr.gallery.R
 import com.flickr.gallery.databinding.FragmentImageListBinding
@@ -47,6 +44,7 @@ open class ListFragment : Fragment() {
         } else {
             loadImages("")
         }
+
         return binding.root
     }
 

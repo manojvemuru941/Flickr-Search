@@ -14,4 +14,10 @@
         android:icon="@drawable/baseline_search_white"
         android:title="Search"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/fav_images"
+        android:enabled="true"
+        android:icon="@android:drawable/btn_star_big_off"
+        android:title="Fav"
+        app:showAsAction="always" />
 </menu>

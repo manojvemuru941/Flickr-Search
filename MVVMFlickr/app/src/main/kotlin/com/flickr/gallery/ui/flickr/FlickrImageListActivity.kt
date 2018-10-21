@@ -10,11 +10,15 @@ import android.support.v7.app.AppCompatActivity
 import com.flickr.gallery.R
 import com.flickr.gallery.databinding.MainActivityBinding
 import com.flickr.gallery.injection.ViewModelFactory
+import com.flickr.gallery.ui.flickr.fav.FavImagesListFragment
+import com.flickr.gallery.ui.flickr.recent.FlickrRecentListFragment
+import com.flickr.gallery.ui.flickr.search.FlickrSearchListFragment
 
 
 class FlickrImageListActivity: AppCompatActivity() {
     private lateinit var binding: MainActivityBinding
     private lateinit var recentImagesFragment: FlickrRecentListFragment
+    private lateinit var favImagesFragment: FavImagesListFragment
     private lateinit var viewModel: FlickrImageListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,6 +77,13 @@ class FlickrImageListActivity: AppCompatActivity() {
             }
             R.id.search_images -> {
                 onSearchRequested()
+            }
+
+            R.id.fav_images -> {
+                if(!::favImagesFragment.isInitialized) {
+                    favImagesFragment = FavImagesListFragment.newInstanceRecentImagesFragment()
+                }
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, favImagesFragment).commit()
             }
         }
         true
