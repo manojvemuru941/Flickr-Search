@@ -2,4 +2,6 @@
 <resources>
     <dimen name="item_padding">16dp</dimen>
     <dimen name="item_elevation">8dp</dimen>
+
+    <dimen name="item_text_size">9sp</dimen>
 </resources>

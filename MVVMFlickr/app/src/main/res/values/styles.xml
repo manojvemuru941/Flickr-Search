@@ -21,11 +21,12 @@
         <item name="android:paddingLeft">@dimen/item_padding</item>
         <item name="android:paddingRight">@dimen/item_padding</item>
         <item name="android:textColor">@color/item_text_color</item>
+        <item name="android:textSize">@dimen/item_text_size</item>
     </style>
 
     <style name="Widget.BottomNavigationView" parent = "Widget.Design.BottomNavigationView">
         <item name="android:fontFamily">@font/concert_one</item>
-        <item name="android:textSize">22sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="Widget_Toolbar_Text">

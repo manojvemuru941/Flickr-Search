@@ -29,6 +29,7 @@ class FlickrImageListActivity: AppCompatActivity() {
         binding.bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemSelected)
         viewModel = ViewModelProviders.of(this, ViewModelFactory(this)).get(FlickrImageListViewModel::class.java)
         setSupportActionBar(binding.customToolbar)
+        supportActionBar?.title = ""
         handleIntent(intent)
     }
 

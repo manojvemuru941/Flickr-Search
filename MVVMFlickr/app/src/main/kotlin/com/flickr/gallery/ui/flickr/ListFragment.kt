@@ -8,7 +8,9 @@ import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.*
 import com.flickr.gallery.R
 import com.flickr.gallery.databinding.FragmentImageListBinding
@@ -32,7 +34,7 @@ open class ListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_image_list, container, false)
 
-        binding.postList.layoutManager = LinearLayoutManager(activity?.applicationContext, LinearLayoutManager.VERTICAL, false)
+        binding.postList.layoutManager = GridLayoutManager(activity?.applicationContext, 2)
 
         viewModel = ViewModelProviders.of(this).get(ListFragmentViewModel::class.java)
         viewModel.errorMessage.observe(this, Observer {
