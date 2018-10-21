@@ -31,6 +31,8 @@ class ImageViewModel:BaseViewModel() {
      * Provides formatted meta data string for Image
      * @param name Image Owner name
      * @param dateTaken Image date taken
+     *
+     * @return returns formatted String
      */
     fun formatMetaData(name: String, dateTaken : String) : String {
         return String.format(getStringResource(R.string.item_meta), name, dateTaken)
