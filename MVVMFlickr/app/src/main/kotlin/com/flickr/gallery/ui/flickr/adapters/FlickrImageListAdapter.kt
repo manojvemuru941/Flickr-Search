@@ -39,6 +39,10 @@ class FlickrImageListAdapter: RecyclerView.Adapter<FlickrImageListAdapter.ViewHo
         notifyDataSetChanged()
     }
 
+    fun getImageList() : List<FlickrImage> {
+        return this.imageList
+    }
+
     class ViewHolder(private val binding: ItemImageBinding):RecyclerView.ViewHolder(binding.root){
         private val viewModel = ImageViewModel()
 

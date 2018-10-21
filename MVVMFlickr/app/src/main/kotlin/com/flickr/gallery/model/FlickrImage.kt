@@ -22,11 +22,4 @@ class FlickrImage : Comparable<FlickrImage> {
     var datetaken : String? = null
     @SerializedName("ownername")
     var ownername : String? = null
-
-    /**
-     * Compares Image date taken and date uploaded
-     */
-    override fun compareTo(other: FlickrImage): Int {
-        return (this.dateupload?.toLong()!!.compareTo(DATE_FORMATTER.parse(other.datetaken).time))
-    }
 }

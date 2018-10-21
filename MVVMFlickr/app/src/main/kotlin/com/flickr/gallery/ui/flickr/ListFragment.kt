@@ -7,13 +7,14 @@ import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.flickr.gallery.R
 import com.flickr.gallery.databinding.FragmentImageListBinding
 import com.flickr.gallery.utils.SEARCH_KEY
+import com.flickr.gallery.utils.SORT_TAKEN
+import com.flickr.gallery.utils.SORT_UPLOADED
 
 /**
  * Created by Manoj Vemuru on 2018-10-20.
@@ -25,9 +26,7 @@ open class ListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if(arguments != null && arguments?.containsKey(SEARCH_KEY)!!) {
-
-        }
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -47,6 +46,23 @@ open class ListFragment : Fragment() {
             loadImages("")
         }
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater!!.inflate(R.menu.sort_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.sort_taken -> {
+                viewModel.sort(SORT_TAKEN)
+            }
+            R.id.sort_uploaded -> {
+                viewModel.sort(SORT_UPLOADED)
+            }
+        }
+        return true
     }
 
     /**

@@ -5,6 +5,7 @@ import android.view.View
 import com.flickr.gallery.BuildConfig
 import com.flickr.gallery.R
 import com.flickr.gallery.base.BaseViewModel
+import com.flickr.gallery.model.FlickrImage
 import com.flickr.gallery.model.FlickrResponse
 import com.flickr.gallery.network.FlickrApi
 import com.flickr.gallery.ui.flickr.adapters.FlickrImageListAdapter
@@ -13,7 +14,9 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import java.util.*
 import javax.inject.Inject
+import kotlin.Comparator
 
 /**
  * Created by Manoj Vemuru on 2018-10-20.
@@ -95,5 +98,18 @@ class ListFragmentViewModel : BaseViewModel() {
      */
     private fun onRetrieveListError(err:Any){
         errorMessage.value = R.string.error
+    }
+
+    fun sort(type : Int) {
+          when(type) {
+            SORT_TAKEN -> {
+                Collections.sort(imageListAdapter.getImageList()) { image, image2 -> (image.dateupload?.toLong()!!.compareTo(DATE_FORMATTER.parse(image2.datetaken).time)) }
+                imageListAdapter.notifyDataSetChanged()
+            }
+            SORT_UPLOADED -> {
+                Collections.sort(imageListAdapter.getImageList()) { image, image2 -> (image2.dateupload?.toLong()!!.compareTo(DATE_FORMATTER.parse(image.datetaken).time)) }
+                imageListAdapter.notifyDataSetChanged()
+            }
+        }
     }
 }

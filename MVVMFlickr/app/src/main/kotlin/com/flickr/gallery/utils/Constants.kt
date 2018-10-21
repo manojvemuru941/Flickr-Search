@@ -11,6 +11,8 @@ const val FORMAT:String = "json"
 const val NO_JSON_CALL_BACK:Int = 1
 const val EXTRAS:String = "url_s,date_upload,date_taken,owner_name"
 val DATE_FORMATTER : DateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+const val SORT_TAKEN:Int = 0
+const val SORT_UPLOADED:Int = 1
 
 private var _context:Context? = null
 

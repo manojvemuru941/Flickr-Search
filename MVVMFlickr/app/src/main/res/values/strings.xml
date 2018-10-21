@@ -6,4 +6,6 @@
 
     <string name="item_meta">Owner Name: %s\n Date Taken : %s</string>
     <string name="search_hint">Search</string>
+    <string name="sort_by_taken">By Taken</string>
+    <string name="sort_by_uploaded">By Uploaded</string>
 </resources>

@@ -17,7 +17,7 @@ class FlickrImageListActivity: AppCompatActivity() {
     private lateinit var recentImagesFragment: FlickrRecentListFragment
     private lateinit var viewModel: FlickrImageListViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?){
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.main_activity)
@@ -27,9 +27,8 @@ class FlickrImageListActivity: AppCompatActivity() {
         recentImagesFragment.retainInstance = true
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, recentImagesFragment).commit()
         binding.bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemSelected)
-
         viewModel = ViewModelProviders.of(this, ViewModelFactory(this)).get(FlickrImageListViewModel::class.java)
-
+        setSupportActionBar(binding.customToolbar)
         handleIntent(intent)
     }
 
