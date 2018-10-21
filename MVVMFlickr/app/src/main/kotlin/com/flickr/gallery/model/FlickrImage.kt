@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName
  * Created by Manoj Vemuru on 2018-10-19.
  */
 @Entity
-class FlickrImage : Comparable<FlickrImage> {
+class FlickrImage  {
     @PrimaryKey(autoGenerate = true)
     var primaryId:Int = 0
     @SerializedName("id")
