@@ -29,3 +29,16 @@ Apps rely on instantiating objects that often require other dependencies. For in
 * Easier unit and integration testing
 
 * Scoped instances
+
+## Room persistence
+The Room persistence library provides an abstraction layer over SQLite to allow for more robust database access while harnessing the full power of SQLite.
+
+### Entity 
+In the context of Architecture Components, the entity is an annotated class that describes a database table.
+SQLite database: On the device, data is stored in a SQLite database. The Room persistence library creates and maintains this database for you.
+
+### DAO
+Short for data access object . A mapping of SQL queries to functions. You used to have to define these queries in a helper class. When you use a DAO, your code calls the functions, and the components take care of the rest.
+
+### Room database
+Database layer on top of a SQLite database that takes care of mundane tasks that you used to handle with a helper class. The Room database uses the DAO to issue queries to the SQLite database based on functions called.
