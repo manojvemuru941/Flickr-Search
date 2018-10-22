@@ -28,32 +28,42 @@ open class ListFragmentViewModel : BaseViewModel() {
     lateinit var flickrApi: FlickrApi
     @Inject
     lateinit var favImageDao: FavImageDao
+
     val imageListAdapter: FlickrImageListAdapter = FlickrImageListAdapter()
 
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
     val errorMessage: MutableLiveData<Int> = MutableLiveData()
-    val errorClickListener = View.OnClickListener { loadImages("") }
+    open val errorClickListener = View.OnClickListener {
+        loadImages()
+    }
 
     protected lateinit var subscription: Disposable
+    var viewType : Int = ListFragment.VIEW_TYPE.RECENT.type
+    var searchQuery:String = ""
 
     fun init() {
-        loadImages("")
+        loadImages()
     }
 
     fun init(query : String) {
-        loadImages(query)
+        searchQuery = query
+        loadImages()
     }
 
     override fun onCleared() {
         super.onCleared()
-        subscription.dispose()
+        if(subscription != null)
+            subscription.dispose()
     }
 
-    private fun loadImages(query : String) {
-        if(query.isBlank()) {
-            handleResponse(flickrApi.getFlickrLatestImages(METHOD_NAME_RECENT, BuildConfig.FLICKR_API_TOKEN, FORMAT, NO_JSON_CALL_BACK, EXTRAS))
-        } else {
-            handleResponse(flickrApi.getSearchImages(METHOD_NAME_SEARCH, BuildConfig.FLICKR_API_TOKEN, FORMAT, NO_JSON_CALL_BACK, EXTRAS, query))
+    private fun loadImages() {
+        when(viewType) {
+            ListFragment.VIEW_TYPE.RECENT.type -> {
+                handleResponse(flickrApi.getFlickrLatestImages(METHOD_NAME_RECENT, BuildConfig.FLICKR_API_TOKEN, FORMAT, NO_JSON_CALL_BACK, EXTRAS))
+            }
+            ListFragment.VIEW_TYPE.SEARCH.type -> {
+                handleResponse(flickrApi.getSearchImages(METHOD_NAME_SEARCH, BuildConfig.FLICKR_API_TOKEN, FORMAT, NO_JSON_CALL_BACK, EXTRAS, searchQuery))
+            }
         }
     }
 
@@ -61,7 +71,7 @@ open class ListFragmentViewModel : BaseViewModel() {
      * Handles Flickr Api Response
      * @param response Rective Observable for Flickr API response
      */
-    protected fun handleResponse(response : Observable<FlickrResponse>) {
+    open fun handleResponse(response : Observable<FlickrResponse>) {
        subscription = response.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onRetrieveListStart() }

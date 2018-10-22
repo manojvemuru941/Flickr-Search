@@ -14,11 +14,15 @@ import com.flickr.gallery.databinding.FragmentImageListBinding
 import com.flickr.gallery.utils.SEARCH_KEY
 import com.flickr.gallery.utils.SORT_TAKEN
 import com.flickr.gallery.utils.SORT_UPLOADED
+import com.flickr.gallery.utils.VIEW_KEY
 
 /**
  * Created by Manoj Vemuru on 2018-10-20.
  */
 open class ListFragment : Fragment() {
+    enum class VIEW_TYPE(val type: Int) {
+        RECENT(0), SEARCH(1), FAV(2)
+    }
     protected lateinit var binding: FragmentImageListBinding
     protected lateinit var viewModel: ListFragmentViewModel
     private var errorSnackbar: Snackbar? = null
@@ -39,10 +43,19 @@ open class ListFragment : Fragment() {
         })
         binding.viewModel = viewModel
 
-        if(arguments != null && arguments?.containsKey(SEARCH_KEY)!!) {
-            loadImages(arguments!!.getString(SEARCH_KEY))
-        } else {
-            loadImages("")
+        if(arguments != null && arguments?.containsKey(VIEW_KEY)!!)
+        {
+            binding.viewModel!!.viewType = arguments!!.getInt(VIEW_KEY)
+        }
+        when(binding.viewModel!!.viewType) {
+            VIEW_TYPE.RECENT.type -> {
+                viewModel.init()
+            }
+            VIEW_TYPE.SEARCH.type -> {
+                if(arguments != null && arguments?.containsKey(SEARCH_KEY)!!) {
+                    viewModel.init(arguments!!.getString(SEARCH_KEY))
+                }
+            }
         }
 
         return binding.root
@@ -66,22 +79,10 @@ open class ListFragment : Fragment() {
     }
 
     /**
-     * Loads Images with tag
-     * @param query user search text
-     */
-    protected fun loadImages(query : String) {
-        if(query.isBlank()) {
-            viewModel.init()
-        } else {
-            viewModel.init(arguments!!.getString(SEARCH_KEY))
-        }
-    }
-
-    /**
      * Shows Snack Bar with error message
      * @param errorMessage Error Message
      */
-    protected fun showError(@StringRes errorMessage:Int){
+    open fun showError(@StringRes errorMessage:Int){
         errorSnackbar = Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_INDEFINITE)
         errorSnackbar?.setAction(R.string.retry, viewModel.errorClickListener)
         errorSnackbar?.show()
@@ -90,7 +91,7 @@ open class ListFragment : Fragment() {
     /**
      * Hides Error Message
      */
-    protected fun hideError(){
+    open fun hideError(){
         errorSnackbar?.dismiss()
     }
 }

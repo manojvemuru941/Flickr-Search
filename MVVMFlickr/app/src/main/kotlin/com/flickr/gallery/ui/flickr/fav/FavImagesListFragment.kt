@@ -10,8 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.flickr.gallery.R
 import com.flickr.gallery.ui.flickr.base.ListFragment
-import com.flickr.gallery.ui.flickr.base.ListFragmentViewModel
-import com.flickr.gallery.utils.SEARCH_KEY
 
 /**
  * Created by Manoj Vemuru on 2018-10-21.

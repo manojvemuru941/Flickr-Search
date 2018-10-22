@@ -5,6 +5,7 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 
 const val SEARCH_KEY:String = "search"
+const val VIEW_KEY:String = "view"
 const val METHOD_NAME_RECENT:String = "flickr.photos.getRecent"
 const val METHOD_NAME_SEARCH:String = "flickr.photos.search"
 const val FORMAT:String = "json"
