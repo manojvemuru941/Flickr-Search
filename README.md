@@ -15,3 +15,17 @@ There are 3 parts to the Model-View-ViewModel architecture:
 Here is a typical high level MVVM app architecture:
 
 ![Alt text](https://cdn-images-1.medium.com/max/800/1*tO9RsrblUPOv_u0loUM97g.png)
+
+## Dependency Injection with Dagger 2
+
+Apps rely on instantiating objects that often require other dependencies. For instance, a Twitter API client may be built using a networking library such as Retrofit. 
+
+### Advantages
+
+* Simplifies access to shared instances
+
+* Easy configuration of complex dependencies
+
+* Easier unit and integration testing
+
+* Scoped instances
