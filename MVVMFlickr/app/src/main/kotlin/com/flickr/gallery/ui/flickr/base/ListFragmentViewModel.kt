@@ -26,8 +26,6 @@ import javax.inject.Inject
 open class ListFragmentViewModel : BaseViewModel() {
     @Inject
     lateinit var flickrApi: FlickrApi
-    @Inject
-    lateinit var favImageDao: FavImageDao
 
     val imageListAdapter: FlickrImageListAdapter = FlickrImageListAdapter()
 

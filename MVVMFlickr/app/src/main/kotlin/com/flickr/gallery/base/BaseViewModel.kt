@@ -28,8 +28,8 @@ abstract class BaseViewModel:ViewModel(){
         when (this) {
             is FlickrImageListViewModel -> injector.inject(this)
             is ImageViewModel -> injector.inject(this)
-            is ListFragmentViewModel -> injector.inject(this)
             is FavListFragmentViewModel -> injector.inject(this)
+            is ListFragmentViewModel -> injector.inject(this)
         }
     }
 }
