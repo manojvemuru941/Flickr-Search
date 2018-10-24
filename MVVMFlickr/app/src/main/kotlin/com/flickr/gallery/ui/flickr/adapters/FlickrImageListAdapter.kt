@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import com.flickr.gallery.R
 import com.flickr.gallery.databinding.ItemImageBinding
 import com.flickr.gallery.model.FlickrImage
-import com.flickr.gallery.model.FlickrImages
 import com.flickr.gallery.ui.flickr.ImageViewModel
 
 class FlickrImageListAdapter: RecyclerView.Adapter<FlickrImageListAdapter.ViewHolder>() {

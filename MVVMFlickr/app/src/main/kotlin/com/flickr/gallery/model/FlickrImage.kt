@@ -2,7 +2,6 @@ package com.flickr.gallery.model
 
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
-import com.flickr.gallery.utils.DATE_FORMATTER
 import com.google.gson.annotations.SerializedName
 
 /**
