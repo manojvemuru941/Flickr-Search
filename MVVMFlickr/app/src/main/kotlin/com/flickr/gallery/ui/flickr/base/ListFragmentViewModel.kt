@@ -36,7 +36,6 @@ open class ListFragmentViewModel : BaseViewModel() {
     }
 
     protected lateinit var subscription: Disposable
-    var viewType : Int = ListFragment.VIEW_TYPE.RECENT.type
     var searchQuery:String = ""
 
     fun init() {
@@ -54,15 +53,7 @@ open class ListFragmentViewModel : BaseViewModel() {
             subscription.dispose()
     }
 
-    private fun loadImages() {
-        when(viewType) {
-            ListFragment.VIEW_TYPE.RECENT.type -> {
-                handleResponse(flickrApi.getFlickrLatestImages(METHOD_NAME_RECENT, BuildConfig.FLICKR_API_TOKEN, FORMAT, NO_JSON_CALL_BACK, EXTRAS))
-            }
-            ListFragment.VIEW_TYPE.SEARCH.type -> {
-                handleResponse(flickrApi.getSearchImages(METHOD_NAME_SEARCH, BuildConfig.FLICKR_API_TOKEN, FORMAT, NO_JSON_CALL_BACK, EXTRAS, searchQuery))
-            }
-        }
+    open fun loadImages() {
     }
 
     /**

@@ -1,24 +1,26 @@
 package com.flickr.gallery.ui.flickr.recent
 
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import com.flickr.gallery.ui.flickr.base.ListFragment
-import com.flickr.gallery.ui.flickr.search.FlickrSearchListFragment
-import com.flickr.gallery.utils.SEARCH_KEY
-import com.flickr.gallery.utils.VIEW_KEY
 
 /**
  * Created by Manoj Vemuru on 2018-10-20.
  */
 
-class FlickrRecentListFragment : ListFragment() {
+class FlickrRecentListFragment : ListFragment<FlickrRecentListViewModel>() {
 
     companion object {
         fun newInstanceRecentImagesFragment(): FlickrRecentListFragment {
-            val fragment = FlickrRecentListFragment()
-            val args = Bundle()
-            args.putInt(VIEW_KEY, VIEW_TYPE.RECENT.type)
-            fragment.arguments = args
-            return fragment
+            return FlickrRecentListFragment()
         }
+    }
+
+    override fun loadContent(arguments: Bundle?) {
+        viewModel.init()
+    }
+
+    override fun provideViewModel(): FlickrRecentListViewModel {
+     return ViewModelProviders.of(this).get(FlickrRecentListViewModel::class.java)
     }
 }
